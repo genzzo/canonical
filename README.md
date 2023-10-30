@@ -1,6 +1,6 @@
 ## Description
 
-In the spirit of the Vanilla framework this project only uses html, css, and good old vanialla Javascript
+In the spirit of the Vanilla framework this project only uses html, css, and good old vanilla Javascript
 
 ## Running the project
 
