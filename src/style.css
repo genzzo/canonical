@@ -2,6 +2,11 @@
   display: inline;
 }
 
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .container {
   padding: 1rem;
   align-items: stretch;

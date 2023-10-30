@@ -53,20 +53,20 @@ const createPostCard = (post: Post) => {
     <div class="p-card card">
       <div class="p-card__content card-content">
           <div>
-            <span >${tags}</span>
-            <hr class="u-sv1 p-2">
-            <img class="p-card__image" alt="" height="185" width="330" src="${post.featured_media}">
-            <h4>
+            <span class="px-2">${tags}</span>
+            <hr class="u-sv2">
+            <img class="p-card__image px-2" alt="" height="185" width="330" src="${post.featured_media}">
+            <h4 class="px-2">
                 <a href="${post.link}">${post.title.rendered}</a>
             </h4>
           </div>
           <div>
-            <div>
+            <div class="px-2">
               <address class="inline">By <a rel="author" href="${author.link}">${author.name}</a></address> 
               <i>on <time pubdate datetime="${post.date}" title="${date}">${date}</time></i>
             </div>
             <hr class="u-sv1 p-2">
-            <span class="u-no-padding--bottom">${post.type}</span>
+            <span class="u-no-padding--bottom px-2">${post.type}</span>
           </div>
       </div>
     </div>
@@ -77,12 +77,18 @@ const createPostCard = (post: Post) => {
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
 async function getPosts() {
-  const response = await fetch(
-    "https://people.canonical.com/~anthonydillon/wp-json/wp/v2/posts.json"
-  );
-  const data = (await response.json()) as Post[];
+  app.innerHTML = `<h1>Loading...</h1>`;
 
-  app.innerHTML = data.map((post) => createPostCard(post)).join("\n");
+  try {
+    const response = await fetch(
+      "https://people.canonical.com/~anthonydillon/wp-json/wp/v2/posts.json"
+    );
+    const data = (await response.json()) as Post[];
+
+    app.innerHTML = data.map((post) => createPostCard(post)).join("\n");
+  } catch (_error) {
+    app.innerHTML = `<h1>Something went wrong</h1>`;
+  }
 }
 
 window.addEventListener("load", () => {
